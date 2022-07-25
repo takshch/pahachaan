@@ -1,3 +1,7 @@
 {
-  "port": 4000
+  "port": 4000,
+  "logs": {
+    "file": false,
+    "console": true
+  }
 }

@@ -1,6 +1,7 @@
 const config = require('config');
 const http = require('http');
 const app = require('./src/app');
+const { logger } = require('./src/utils/logger');
 
 const PORT = config.get('port');
 
@@ -11,11 +12,11 @@ if (!PORT) {
 const server = http.createServer(app);
 
 function onListening() {
-  console.log(`Server started listening on port ${PORT}`);
+  logger.info(`Server started listening on port ${PORT}`);
 }
 
-function onError() {
-  console.log('error');
+function onError(err) {
+  logger.info(err);
 }
 
 server.on('listening', onListening);
