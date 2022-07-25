@@ -3,17 +3,27 @@ const config = require('config');
 
 const options = {
   file: {
-    level: 'info',
-    handleExceptions: true,
-    filename: 'logs/app.log',
-    json: true,
-    maxsize: 5242880,
-    maxFiles: 5,
-    colorize: false,
-    silent: process.env.NODE_ENV === 'test'
+    info: {
+      level: 'info',
+      handleExceptions: true,
+      filename: 'logs/app.log',
+      json: true,
+      maxsize: 5242880,
+      maxFiles: 5,
+      colorize: false,
+      silent: process.env.NODE_ENV === 'test'
+    },
+    error: {
+      level: 'error',
+      handleExceptions: true,
+      filename: 'logs/error.log',
+      json: true,
+      maxsize: 5242880,
+      maxFiles: 5,
+      colorize: false,
+    },
   },
   console: {
-    level: 'info',
     handleExceptions: true,
     json: false,
     colorize: true,
@@ -25,11 +35,12 @@ const logs = config.get('logs');
 
 const transports = [];
 
-if (logs.file) {
-  transports.push(new winston.transports.File(options.file));
+if (logs?.file) {
+  transports.push(new winston.transports.File(options.file.error));
+  transports.push(new winston.transports.File(options.file.info));
 }
 
-if (logs.console) {
+if (logs?.console) {
   transports.push(new winston.transports.Console(options.console));
 }
 

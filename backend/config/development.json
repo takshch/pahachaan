@@ -3,5 +3,8 @@
   "logs": {
     "file": false,
     "console": true
+  },
+  "mongodb": {
+    "url": "mongodb://localhost:27017/pahachaan"
   }
 }
