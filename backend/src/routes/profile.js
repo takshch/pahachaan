@@ -3,17 +3,20 @@ const { validateAuth } = require('../validators/auth');
 const {
   validateCreateProfile,
   validateGetProfile,
+  validateUpdateProfile,
   validateDeleteProfile
 } = require('../validators/profile');
 const {
   createProfile,
   getProfile,
-  deleteProfile
+  updateProfile,
+  deleteProfile,
 } = require('../controllers/profile');
 
 const router = express.Router();
 
 router.post('/', validateAuth, validateCreateProfile, createProfile);
+router.patch('/:id', validateAuth, validateUpdateProfile, updateProfile);
 router.delete('/:id', validateAuth, validateDeleteProfile, deleteProfile);
 
 router.get('/:id', validateGetProfile, getProfile);

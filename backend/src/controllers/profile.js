@@ -28,6 +28,25 @@ const getProfile = async (req, res) => {
   }
 };
 
+const updateProfile = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const profile = await profileService.updateProfile(id, req.body);
+
+    if (profile) {
+      const { _id: id, name, numbers, whatsapps } = profile;
+      const data = { id, name, numbers, whatsapps };
+      return res.status(200).send(data);
+    } else {
+      return res.status(404).send({ error: 'profile does not exists' });
+    }
+  } catch (e) {
+    console.log(e);
+    return res.status(422).send();
+  }
+};
+
 const deleteProfile = async (req, res) => {
   const { id } = req.params;
 
@@ -40,4 +59,4 @@ const deleteProfile = async (req, res) => {
   }
 };
 
-module.exports = { createProfile, getProfile, deleteProfile };
+module.exports = { createProfile, getProfile, updateProfile, deleteProfile };
