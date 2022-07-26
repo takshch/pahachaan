@@ -1,5 +1,6 @@
 const userService = require('../services/user');
 const authService = require('../services/auth');
+const { COOKIE_NAME, COOKIE_OPTIONS } = require('../utils/cookie');
 
 const ERROR_MESSAGE = {
   'email': 'email already exists',
@@ -30,10 +31,6 @@ const register = async (req, res) => {
   res.status(500);
 };
 
-const COOKIE_OPTIONS = {
-  maxAge: new Date(Date.now() + 60 * 60 * 1000),
-  httpOnly: true
-};
 
 const login = async (req, res) => {
   try {
@@ -41,7 +38,7 @@ const login = async (req, res) => {
 
     if (user) {
       const token = authService.generateToken(user.username);
-      res.cookie('pahachaan', token, COOKIE_OPTIONS);
+      res.cookie(COOKIE_NAME, token, COOKIE_OPTIONS)
       res.status(200).send();
     } else {
       return res.status(401).send({ error: 'Invalid credentials' });
