@@ -10,4 +10,8 @@ const findProfile = async (profileId) => {
   return profile;
 };
 
-module.exports = { findProfile, createProfile };
+const deleteProfile = async (profileId) => {
+  await Profile.deleteOne({ _id: profileId });
+}
+
+module.exports = { findProfile, createProfile, deleteProfile };

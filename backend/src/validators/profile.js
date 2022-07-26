@@ -33,4 +33,10 @@ const validateGetProfile = async (req, res, next) => {
   }
 };
 
-module.exports = { validateCreateProfile, validateGetProfile };
+const validateDeleteProfile = validateGetProfile;
+
+module.exports = {
+  validateCreateProfile,
+  validateGetProfile,
+  validateDeleteProfile
+};

@@ -21,11 +21,23 @@ const getProfile = async (req, res) => {
       const data = { id, name, numbers, whatsapps };
       return res.status(200).send(data);
     } else {
-      return res.status(200).send({ error: 'profile does not exists' });
+      return res.status(404).send({ error: 'profile does not exists' });
     }
   } catch (e) {
     return res.status(500).send();
   }
 };
 
-module.exports = { createProfile, getProfile };
+const deleteProfile = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await profileService.deleteProfile(id);
+    return res.status(200).send();
+  } catch (e) {
+    console.log(e);
+    return res.status(500).send();
+  }
+};
+
+module.exports = { createProfile, getProfile, deleteProfile };
