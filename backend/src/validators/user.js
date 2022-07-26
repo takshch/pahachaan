@@ -1,20 +1,15 @@
 const Joi = require('joi');
-
-const options = {
-  errors: {
-    wrap: { label: '' }
-  }
-};
+const { OPTIONS } = require('./~base');
 
 const validateRegister = async (req, res, next) => {
-  const schema = Joi.object().keys({
+  const schema = Joi.object().strict().keys({
     username: Joi.string().required(),
     email: Joi.string().email({ tlds: { allow: false } }).required(),
     password: Joi.string().required().min(6),
   });
 
   try {
-    await schema.validateAsync(req.body, options);
+    await schema.validateAsync(req.body, OPTIONS);
     next();
   } catch (e) {
     const { details } = e;
@@ -31,7 +26,7 @@ const validateLogin = async (req, res, next) => {
   }).xor('username', 'email');
 
   try {
-    await schema.validateAsync(req.body, options);
+    await schema.validateAsync(req.body, OPTIONS);
     next();
   } catch (e) {
     const { details } = e;
