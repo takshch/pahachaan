@@ -5,4 +5,9 @@ const createProfile = async ({ name, numbers, whatsapps }) => {
   return profile;
 };
 
-module.exports = { createProfile };
+const findProfile = async (profileId) => {
+  const profile = await Profile.findById(profileId);
+  return profile;
+};
+
+module.exports = { findProfile, createProfile };

@@ -18,4 +18,19 @@ const validateCreateProfile = async (req, res, next) => {
   }
 };
 
-module.exports = { validateCreateProfile };
+const validateGetProfile = async (req, res, next) => {
+  const schema = Joi.object().keys({
+    id: Joi.string().required(),
+  });
+
+  try {
+    await schema.validateAsync(req.params, OPTIONS);
+    next();
+  } catch (e) {
+    const { details } = e;
+    const { message } = details[0];
+    res.status(400).send({ error: message });
+  }
+};
+
+module.exports = { validateCreateProfile, validateGetProfile };
