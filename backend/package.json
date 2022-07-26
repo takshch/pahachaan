@@ -5,15 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node index.js"
+    "dev": "nodemon index.js",
+    "generateJwtKey": "openssl ecparam -name prime256v1 -genkey -noout -out keys/jwt.key",
+    "generateCookieKey": "openssl ecparam -name secp384r1 -genkey -noout -out keys/cookie.key"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "config": "^3.3.7",
+    "cookie-parser": "^1.4.6",
     "express": "^4.18.1",
     "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.4.6",
     "morgan": "^1.10.0",
     "winston": "^3.8.1"
