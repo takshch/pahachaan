@@ -3,6 +3,7 @@ const identityService = require('../services/identity');
 
 const createIdentity = async (req, res) => {
   const { profileId } = req.body;
+  const { username: owner } = req;
 
   try {
     if (profileId) {
@@ -13,7 +14,7 @@ const createIdentity = async (req, res) => {
       }
     }
 
-    const identity = await identityService.createIdentity(profileId);
+    const identity = await identityService.createIdentity({ profileId, owner });
 
     {
       const { _id: id, profileId } = identity;
@@ -46,12 +47,19 @@ const getIdentity = async (req, res) => {
 const updateIdentity = async (req, res) => {
   const { identityId } = req.params;
   const { profileId } = req.body;
+  const { username } = req;
 
   try {
     let identity = await identityService.findIdentity(identityId);
 
     if (!identity) {
       return res.status(404).send({ error: 'identity does not exists' });
+    }
+
+    const { owner } = identity;
+
+    if (owner !== username) {
+      return res.status(401).send({ error: 'unauthorized' });
     }
 
     identity = await identityService.updateIdentity(identityId, profileId);
@@ -68,8 +76,21 @@ const updateIdentity = async (req, res) => {
 
 const deleteIdentity = async (req, res) => {
   const { identityId } = req.params;
+  const { username } = req;
 
   try {
+    let identity = await identityService.findIdentity(identityId);
+
+    if (!identity) {
+      return res.status(200).send();
+    }
+
+    const { owner } = identity;
+
+    if (owner !== username) {
+      return res.status(401).send({ error: 'unauthorized' });
+    }
+
     await identityService.deleteIdentity(identityId);
     return res.status(200).send();
   } catch (e) {
