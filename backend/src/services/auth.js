@@ -22,7 +22,6 @@ const verifyToken = (token) => {
     jwt.verify(token, privateKey, { algorithm, algorithms: [algorithm] });
     return true;
   } catch (e) {
-    console.log(e);
     return false;
   }
 };
