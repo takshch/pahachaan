@@ -66,4 +66,16 @@ const updateIdentity = async (req, res) => {
   }
 };
 
-module.exports = { createIdentity, getIdentity, updateIdentity };
+const deleteIdentity = async (req, res) => {
+  const { identityId } = req.params;
+
+  try {
+    await identityService.deleteIdentity(identityId);
+    return res.status(200).send();
+  } catch (e) {
+    console.log(e);
+    res.status(500).send();
+  }
+};
+
+module.exports = { createIdentity, getIdentity, updateIdentity, deleteIdentity };

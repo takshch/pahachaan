@@ -12,14 +12,18 @@ const createIdentity = async (profileId) => {
   return identity;
 };
 
-const updateIdentity = async (identityId, profileId = '') => {
-  const identity = await Identity.findByIdAndUpdate(identityId, { $set: { profileId } }, { new: true });
-  return identity;
-};
-
 const findIdentity = async (identityId) => {
   const identity = await Identity.findById(identityId);
   return identity;
 };
 
-module.exports = { findIdentity, createIdentity, updateIdentity };
+const updateIdentity = async (identityId, profileId = '') => {
+  const identity = await Identity.findByIdAndUpdate(identityId, { $set: { profileId } }, { new: true });
+  return identity;
+};
+
+const deleteIdentity = async (identityId) => {
+  await Identity.findByIdAndDelete(identityId);
+};
+
+module.exports = { findIdentity, createIdentity, updateIdentity, deleteIdentity };

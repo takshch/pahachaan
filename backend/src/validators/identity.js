@@ -53,4 +53,24 @@ const validateUpdateIdentity = async (req, res, next) => {
   }
 };
 
-module.exports = { validateCreateIdentity, validateGetIdentity, validateUpdateIdentity };
+const validateDeleteIdentity = async (req, res, next) => {
+  const schema = Joi.object().keys({
+    identityId: Joi.string().length(UUID_LENGTH).required()
+  });
+
+  try {
+    await schema.validateAsync(req.params, OPTIONS);
+    next();
+  } catch (e) {
+    const { details } = e;
+    const { message } = details[0];
+    res.status(400).send({ error: message });
+  }
+};
+
+module.exports = {
+  validateCreateIdentity,
+  validateGetIdentity,
+  validateUpdateIdentity,
+  validateDeleteIdentity
+};
