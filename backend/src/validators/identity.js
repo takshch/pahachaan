@@ -1,11 +1,11 @@
 const Joi = require('joi');
 const { OPTIONS } = require('./~base');
 
-const PROFILE_ID_LENGTH = 32;
+const UUID_LENGTH = 32;
 
 const validateCreateIdentity = async (req, res, next) => {
   const schema = Joi.object().keys({
-    profileId: Joi.string().length(PROFILE_ID_LENGTH)
+    profileId: Joi.string().length(UUID_LENGTH)
   });
 
   try {
@@ -18,4 +18,24 @@ const validateCreateIdentity = async (req, res, next) => {
   }
 };
 
-module.exports = { validateCreateIdentity };
+const validateUpdateIdentity = async (req, res, next) => {
+  const paramsSchema = Joi.object().keys({
+    identityId: Joi.string().length(UUID_LENGTH).required()
+  });
+
+  const bodySchema = Joi.object().keys({
+    profileId: Joi.string().length(UUID_LENGTH)
+  });
+
+  try {
+    await paramsSchema.validateAsync(req.params, OPTIONS);
+    await bodySchema.validateAsync(req.body, OPTIONS);
+    next();
+  } catch (e) {
+    const { details } = e;
+    const { message } = details[0];
+    res.status(400).send({ error: message });
+  }
+};
+
+module.exports = { validateCreateIdentity, validateUpdateIdentity };
