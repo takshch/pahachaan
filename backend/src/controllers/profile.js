@@ -1,8 +1,11 @@
 const profileService = require('../services/profile');
 
 const createProfile = async (req, res) => {
+  const { username } = req;
+
   try {
-    const { _id } = await profileService.createProfile(req.body);
+    const data = { owner: username, ...req.body };
+    const { _id } = await profileService.createProfile(data);
     return res.status(200).send({ id: _id });
   } catch (e) {
     console.log(e);
@@ -49,6 +52,7 @@ const updateProfile = async (req, res) => {
 
 const deleteProfile = async (req, res) => {
   const { id } = req.params;
+  console.log(req.username);
 
   try {
     await profileService.deleteProfile(id);

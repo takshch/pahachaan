@@ -1,8 +1,8 @@
 const Profile = require('../models/profile');
 const { pickBy } = require('../utils/object');
 
-const createProfile = async ({ name, numbers, whatsapps }) => {
-  const profile = await Profile.create({ name, numbers, whatsapps });
+const createProfile = async ({ owner, name, numbers, whatsapps }) => {
+  const profile = await Profile.create({ owner, name, numbers, whatsapps });
   return profile;
 };
 
