@@ -7,6 +7,7 @@ const {
   validateDeleteProfile
 } = require('../validators/profile');
 const {
+  getProfiles,
   createProfile,
   getProfile,
   updateProfile,
@@ -15,6 +16,7 @@ const {
 
 const router = express.Router();
 
+router.get('/', validateAuth, getProfiles);
 router.post('/', validateAuth, validateCreateProfile, createProfile);
 router.patch('/:id', validateAuth, validateUpdateProfile, updateProfile);
 router.delete('/:id', validateAuth, validateDeleteProfile, deleteProfile);

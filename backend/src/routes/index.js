@@ -11,6 +11,6 @@ router.post('/register', validateRegister, register);
 router.post('/login', validateLogin, login);
 router.get('/authtest', validateAuth, (req, res) => res.send(req.username));
 
-router.use('/profile', profileRouter);
+router.use('/profiles', profileRouter);
 
 module.exports = router;

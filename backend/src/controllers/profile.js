@@ -1,5 +1,21 @@
 const profileService = require('../services/profile');
 
+const getProfiles = async (req, res) => {
+  const { username } = req;
+
+  try {
+    const profiles = await profileService.findProfiles(username);
+    const data = profiles.map((profile) => {
+      const { _id: id, name, numbers, whatsapps } = profile;
+      return { id, name, numbers, whatsapps };
+    });
+    res.status(200).send(data);
+  } catch (e) {
+    console.log(e);
+    return res.status(500).send();
+  }
+};
+
 const createProfile = async (req, res) => {
   const { username } = req;
 
@@ -84,4 +100,4 @@ const deleteProfile = async (req, res) => {
   }
 };
 
-module.exports = { createProfile, getProfile, updateProfile, deleteProfile };
+module.exports = { getProfiles, createProfile, getProfile, updateProfile, deleteProfile };

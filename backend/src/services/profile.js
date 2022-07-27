@@ -6,6 +6,11 @@ const createProfile = async ({ owner, name, numbers, whatsapps }) => {
   return profile;
 };
 
+const findProfiles = async (username) => {
+  const profiles = await Profile.find({ owner: username });
+  return profiles;
+};
+
 const findProfile = async (profileId) => {
   const profile = await Profile.findById(profileId);
   return profile;
@@ -22,4 +27,4 @@ const deleteProfile = async (profileId) => {
   await Profile.deleteOne({ _id: profileId });
 };
 
-module.exports = { createProfile, findProfile, updateProfile, deleteProfile };
+module.exports = { findProfiles, createProfile, findProfile, updateProfile, deleteProfile };
