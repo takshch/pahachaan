@@ -18,6 +18,21 @@ const validateCreateIdentity = async (req, res, next) => {
   }
 };
 
+const validateGetIdentity = async (req, res, next) => {
+  const schema = Joi.object().keys({
+    identityId: Joi.string().length(UUID_LENGTH).required()
+  });
+
+  try {
+    await schema.validateAsync(req.params, OPTIONS);
+    next();
+  } catch (e) {
+    const { details } = e;
+    const { message } = details[0];
+    res.status(400).send({ error: message });
+  }
+};
+
 const validateUpdateIdentity = async (req, res, next) => {
   const paramsSchema = Joi.object().keys({
     identityId: Joi.string().length(UUID_LENGTH).required()
@@ -38,4 +53,4 @@ const validateUpdateIdentity = async (req, res, next) => {
   }
 };
 
-module.exports = { validateCreateIdentity, validateUpdateIdentity };
+module.exports = { validateCreateIdentity, validateGetIdentity, validateUpdateIdentity };
