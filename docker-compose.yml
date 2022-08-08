@@ -1,0 +1,15 @@
+services:
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    volumes:
+      - ./frontend:/app
+    ports:
+      - 3000:3000
+  backend:
+    build: ./backend
+    container_name: backend
+    volumes:
+      - ./backend:/app
+    ports:
+      - 4000:4000

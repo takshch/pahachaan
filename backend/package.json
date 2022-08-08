@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js",
+    "dev": "nodemon --delay 500ms index.js",
     "generateJwtKey": "openssl ecparam -name prime256v1 -genkey -noout -out keys/jwt.key",
     "generateCookieKey": "openssl ecparam -name secp384r1 -genkey -noout -out keys/cookie.key"
   },
@@ -20,6 +20,9 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.4.6",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.19",
+    "swagger-jsdoc": "^6.2.1",
+    "swagger-ui-express": "^4.5.0",
     "uuid": "^8.3.2",
     "winston": "^3.8.1"
   }
