@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import IdentityCard from '../components/IdentityCard';
+import Navbar from '../components/Navbar';
 
 const Home: NextPage = () => {
   const identityCards = new Array(100).fill({
@@ -10,6 +11,7 @@ const Home: NextPage = () => {
 
   return (
     <div className="w-full">
+      <Navbar />
       <div className="px-4 py-8">
         <h1 className="text-2xl text-center font-medium mt-2 mb-5">
           Your Identities
