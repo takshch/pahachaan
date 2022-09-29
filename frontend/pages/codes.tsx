@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import Link from 'next/link';
 import CodeCard from '../components/Cards/CodeCard';
 import Navbar from '../components/Navbar';
 
@@ -18,7 +19,11 @@ const Codes: NextPage = () => {
         </h1>
         <div className="flex flex-wrap gap-x-7 gap-y-6 justify-center">
           {identityCards.map((identityCard, index) => (
-            <CodeCard key={index} {...identityCard} />
+            <Link href={`/codes/${index}`}>
+              <a>
+                <CodeCard key={index} {...identityCard} />
+              </a>
+            </Link>
           ))}
         </div>
       </div>
