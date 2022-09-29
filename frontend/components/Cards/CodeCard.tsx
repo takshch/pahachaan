@@ -1,9 +1,9 @@
-interface IdentityCardProps {
+interface CodeCardProps {
   imageUrl: string;
   name: string;
 }
 
-function IdentityCard({ imageUrl, name }: IdentityCardProps) {
+function CodeCard({ imageUrl, name }: CodeCardProps) {
   return (
     <div className="inline-flex flex-col max-w-fit px-3 py-2 border border-slate-300 rounded hover:shadow-md">
       <div className="w-32 mb-1.5">
@@ -14,4 +14,4 @@ function IdentityCard({ imageUrl, name }: IdentityCardProps) {
   );
 }
 
-export default IdentityCard;
+export default CodeCard;

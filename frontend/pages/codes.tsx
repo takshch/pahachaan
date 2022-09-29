@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
-import IdentityCard from '../components/IdentityCard';
+import CodeCard from '../components/Cards/CodeCard';
 import Navbar from '../components/Navbar';
 
-const Home: NextPage = () => {
+const Codes: NextPage = () => {
   const identityCards = new Array(100).fill({
     imageUrl:
       'https://www.investopedia.com/thmb/KfGSwVyV8mOdTHFxL1T0aS3xpE8=/1148x1148/smart/filters:no_upscale()/qr-code-bc94057f452f4806af70fd34540f72ad.png',
@@ -14,11 +14,11 @@ const Home: NextPage = () => {
       <Navbar />
       <div className="px-4 py-8">
         <h1 className="text-2xl text-center font-medium mt-2 mb-5">
-          Your Identities
+          Your QR Codes
         </h1>
         <div className="flex flex-wrap gap-x-7 gap-y-6 justify-center">
           {identityCards.map((identityCard, index) => (
-            <IdentityCard key={index} {...identityCard} />
+            <CodeCard key={index} {...identityCard} />
           ))}
         </div>
       </div>
@@ -26,4 +26,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Codes;
