@@ -14,9 +14,12 @@ const Codes: NextPage = () => {
     <div className="w-full">
       <Navbar />
       <div className="px-4 py-8">
-        <h1 className="text-2xl text-center font-medium mt-2 mb-5">
-          Your QR Codes
-        </h1>
+        <div className="flex justify-center gap-4 mt-2 mb-8 mx-5">
+          <h1 className="text-2xl font-medium">Your QR Codes</h1>
+          <button className="flex items-center justify-between gap-x-2 bg-indigo-600 px-3 rounded text-white">
+            <div className="text-xl my-1">+</div> New QR Code
+          </button>
+        </div>
         <div className="flex flex-wrap gap-x-7 gap-y-6 justify-center">
           {identityCards.map((identityCard, index) => (
             <Link key={index} href={`/codes/${index}`}>
