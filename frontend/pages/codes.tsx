@@ -4,7 +4,7 @@ import CodeCard from '../components/Cards/CodeCard';
 import Navbar from '../components/Navbar';
 
 const Codes: NextPage = () => {
-  const identityCards = new Array(100).fill({
+  const identityCards = new Array(14).fill({
     imageUrl:
       'https://www.investopedia.com/thmb/KfGSwVyV8mOdTHFxL1T0aS3xpE8=/1148x1148/smart/filters:no_upscale()/qr-code-bc94057f452f4806af70fd34540f72ad.png',
     name: 'qr code 1',
@@ -19,9 +19,9 @@ const Codes: NextPage = () => {
         </h1>
         <div className="flex flex-wrap gap-x-7 gap-y-6 justify-center">
           {identityCards.map((identityCard, index) => (
-            <Link href={`/codes/${index}`}>
+            <Link key={index} href={`/codes/${index}`}>
               <a>
-                <CodeCard key={index} {...identityCard} />
+                <CodeCard {...identityCard} />
               </a>
             </Link>
           ))}
